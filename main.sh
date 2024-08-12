@@ -1,9 +1,16 @@
-
 #!/bin/bash
 # Script : my-pi-temp.sh
 # Purpose: Afficher la température du CPU ARM, du GPU et des SSD NVMe du Raspberry Pi 5 en temps réel
 # Author: Jérémy Noverraz
 # -------------------------------------------------------
+
+# Vérification de l'installation de smartctl
+if ! command -v smartctl &> /dev/null; then
+    echo "Installation de smartctl..."
+    sudo apt-get update
+    sudo apt-get install smartmontools
+fi
+
 trap 'echo "Arrêt du script." && exit 0' SIGINT
 
 while true; do
