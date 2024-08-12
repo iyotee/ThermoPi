@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script : my-pi-temp.sh
+# Script : main.sh
 # Purpose: Afficher la température du CPU ARM, du GPU et des SSD NVMe (et carte SD) du Raspberry Pi 5 en temps réel
 # Author: Jérémy Noverraz
 # -------------------------------------------------------
