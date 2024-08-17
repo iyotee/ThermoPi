@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script : main.sh
+# Script : my-pi-temp.sh
 # Purpose: Afficher la température du CPU ARM, du GPU et des SSD NVMe (et carte SD) du Raspberry Pi 5 en temps réel
 # Author: Jérémy Noverraz
 # -------------------------------------------------------
@@ -31,22 +31,13 @@ while true; do
     # Vérification de la présence d'une carte SD
     if [ -e "/dev/mmcblk0" ]; then
         sd_temp=$(sudo smartctl -a /dev/mmcblk0 | grep "Temperature:" | awk '{print $2}')
-        
-        # Afficher la température de la carte SD uniquement si une valeur est disponible
-        if [ -n "$sd_temp" ]; then
-            echo -e "Carte SD => \e[32m$sd_temp°C\e[0m"
-        fi
+        echo -e "Carte SD => \e[32m$sd_temp°C\e[0m"
     fi
 
     echo "$(date) @ $(hostname)"
     echo "-------------------------------------------"
     echo -e "GPU => \e[32m$gpu_temp\e[0m"
     echo -e "CPU => \e[32m$((cpu/1000))'C\e[0m"
-    
-    # Afficher la température de la carte SD après le CPU, uniquement si une valeur est disponible
-    if [ -n "$sd_temp" ]; then
-        echo -e "Carte SD => \e[32m$sd_temp°C\e[0m"
-    fi
 
     sleep 1
     clear
